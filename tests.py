@@ -58,4 +58,5 @@ class TestBooksCollector:
     def test_get_list_of_favorites_books_true(self, collector): 
         collector.add_new_book(BOOK1)
         collector.add_book_in_favorites(BOOK1)
-        assert BOOK1 in collector.favorites
+        assert BOOK1 in collector.get_list_of_favorites_books()
+        
