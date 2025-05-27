@@ -1,6 +1,6 @@
 from main import BooksCollector
 import pytest
-from data import BOOK1, BOOK2, HORROR_GENRE, SPECIFIC_GENRE, FANTASTIC_GENRE
+from data import BOOK1, BOOK2, HORROR_GENRE, SPECIFIC_GENRE, FANTASTIC_GENRE, MULT_GENRE
 
 
 class TestBooksCollector:
@@ -39,10 +39,16 @@ class TestBooksCollector:
         bookcollection = { book_name:book_genre }
         assert collector.get_books_genre() == bookcollection
 
-    def test_get_books_for_children_true(self, collector): 
+    @pytest.mark.parametrize('book_name, book_genre', [(BOOK1, FANTASTIC_GENRE),(BOOK2,MULT_GENRE)])
+    def test_get_books_for_children_true(self, collector, book_name, book_genre):
+        collector.add_new_book(book_name)
+        collector.set_book_genre(book_name,book_genre)
+        assert collector.get_books_for_children() == [book_name]
+
+    def test_get_books_for_children_no_add_book_with_age_genre(self, collector):
         collector.add_new_book(BOOK1)
-        collector.set_book_genre(BOOK1,FANTASTIC_GENRE)
-        assert collector.get_books_for_children() == [BOOK1]
+        collector.set_book_genre(BOOK1,HORROR_GENRE)
+        assert not collector.get_books_for_children() == [BOOK1]
 
     def test_add_book_in_favorites_true(self, collector): 
         collector.add_new_book(BOOK1)
