@@ -1,0 +1,6 @@
+BOOK1 = 'Книга с названием Один'
+BOOK2 = 'Книга с названием Два'
+HORROR_GENRE = 'Ужасы'
+SPECIFIC_GENRE = 'Анимэ'
+FANTASTIC_GENRE = 'Фантастика'
+MULT_GENRE = 'Мультфильмы'
